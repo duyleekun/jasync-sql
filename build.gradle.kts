@@ -147,8 +147,11 @@ subprojects {
     }
 
     signing {
+        setRequired({
+            gradle.taskGraph.hasTask("publish")
+        })
         // use the properties passed as command line args
-        // -Psigning.keyId=${{secrets.SIGNING_KEY_ID}} -Psigning.password=${{secrets.SIGNING_PASSWORD}} -Psigning.secretKeyRingFile=$(echo ~/.gradle/secring.gpg)
+        // -Psigning.keyId=${{secrets.SIG
         sign(publishing.publications["mavenJava"])
     }
 }
